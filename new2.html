@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Upload file </title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h2>UPLOAD INVOICES</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                 {% for message in messages %}
+                   <div class="alert alert-success">
+                    <strong>{{ message }}</strong>
+                  </div>
+                 {% endfor %}
+                  {% endif %}
+                {% endwith %}
+               </p>
+  <div>
+   <!-- File upload form -->
+   <form method="post" action="/upload" enctype="multipart/form-data" class="form-inline">
+    <div class="form-group">
+                      <label>Choose Images: </label>
+                      <input type="file" name="files[]" id="fileInput" class="form-control" multiple >
+                 </div>
+                 <input type="submit" name="submit" class="btn btn-success" value="UPLOAD"/>
+             </form>
+  </div>
+  </div>
+ </div>
+</div>
+
+<!--    <p>-->
+<!--                {% with messages = get_flashed_messages() %}-->
+<!--                  {% if messages %}-->
+<!--                 {% for message in messages %}-->
+<!--                   <div class="alert alert-success">-->
+<!--                    <strong>{{ message }}</strong>-->
+<!--                  </div>-->
+<!--                 {% endfor %}-->
+<!--                  {% endif %}-->
+<!--                {% endwith %}-->
+<!--               </p>-->
+
+<div class="container">
+<h2>UPLOAD EXCEL</h2>
+    <div class="row">
+        <div class="col-lg-12">
+<!--            <p>-->
+<!--                {% with messages = get_flashed_messages() %}-->
+<!--                  {% if messages %}-->
+<!--                 {% for message in messages %}-->
+<!--                   <div class="alert alert-success">-->
+<!--                    <strong>{{ message }}</strong>-->
+<!--                  </div>-->
+<!--                 {% endfor %}-->
+<!--                  {% endif %}-->
+<!--                {% endwith %}-->
+<!--               </p>-->
+<div class="">
+    <label>Choose Excel File: </label>
+      <form method="post" action="uploader" enctype="multipart/form-data" class="form-inline">
+
+<input type="file"  name="xlsx-file" id="" value="" class="form-control" multiple>
+<input type="submit" name="submit" class="btn btn-success" value="UPLOAD"/>
+
+</form>
+</div>
+<!--            <div class="">-->
+<!--<form class="" action="connection" method="post" enctype="multipart/form-data">-->
+
+<!--<input type="submit" name="" value="Submit">-->
+<!--</form>-->
+<!--</div>-->
+                       <div class="">
+<form class="" action="download" method="post" enctype="multipart/form-data">
+
+<input type="submit" name="" value="DOWNLOAD">
+</form>
+</div>
+  </div>
+ </div>
+</div>
+
+
+
+<!--    <p>-->
+<!--                {% with messages = get_flashed_messages() %}-->
+<!--                  {% if messages %}-->
+<!--                 {% for message in messages %}-->
+<!--                   <div class="alert alert-success">-->
+<!--                    <strong>{{ message }}</strong>-->
+<!--                  </div>-->
+<!--                 {% endfor %}-->
+<!--                  {% endif %}-->
+<!--                {% endwith %}-->
+<!--               </p>-->
+<script>
+$(document).ready(function(){
+ // File type validation
+    $("#fileInput").change(function(){
+        var fileLength = this.files.length;
+        var match= ["image/jpeg","image/png","image/jpg","image/gif"];
+        var i;
+        for(i = 0; i < fileLength; i++){
+            var file = this.files[i];
+            var imagefile = file.type;
+            if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]) || (imagefile==match[3]))){
+                alert('Please select a valid image file (JPEG/JPG/PNG/GIF).');
+                $("#fileInput").val('');
+                return false;
+            }
+        }
+    });
+    // File type validation
+    $("#fileInputt1").change(function(){
+        var fileLength = this.files.length;
+        var match= ["text/xlsx", "text/csv"];
+        var i;
+        for(i = 0; i < fileLength; i++){
+            var file = this.files[i];
+            var excelfile = file.type;
+           if(!((excelfile==match[0]) || (excelfile==match[1]) || (excelfile==match[2]) || (excelfile==match[3]))){
+              alert('Please select a valid excel file (.xlsx / .csv).');
+              $("#fileInputt1").val('');
+                              return false;
+           }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
